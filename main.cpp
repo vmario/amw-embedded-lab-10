@@ -6,24 +6,6 @@
 #include <avr/interrupt.h>
 
 /**
- * Uśrednia pomiar temperatury.
- *
- * @return Uśredniona temperatura.
- */
-uint16_t average()
-{
-	return adc.temperature();
-}
-
-/**
- * Obsługa przerwania pomiaru ADC.
- */
-ISR(ADC_vect)
-{
-	display.print(average(), 2);
-}
-
-/**
  * Obsługa przerwania komparatora Timer/Counter0.
  */
 ISR(TIMER0_OVF_vect)
@@ -36,12 +18,15 @@ ISR(TIMER0_OVF_vect)
  */
 int main()
 {
+	display.print(0);
 	shifter.initialize();
 	timer.initialize();
-	adc.initialize();
 
 	sei();
 
 	while (true) {
+		if (bit_is_clear(PINC, 2)) {
+			display.print(420);
+		}
 	}
 }
