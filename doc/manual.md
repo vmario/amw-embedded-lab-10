@@ -1,5 +1,5 @@
 ---
-title: "Ćwiczenie 10: "
+title: "Ćwiczenie 10: Zawody CTF (_Capture&nbsp;the flag_)"
 subtitle: "Instrukcja laboratorium"
 footer-left: "Instrukcja laboratorium"
 author: [Mariusz Chilmon <<mariusz.chilmon@ctm.gdynia.pl>>]
@@ -14,84 +14,48 @@ header-includes: |
   \usepackage{algpseudocode}
 ...
 
-> An investment in knowledge always pays the best interest.
+> Give a man a program, frustrate him for a day. Teach a man to program, frustrate him for a lifetime.
 >
-> — _Benjamin Franklin_
+> — _Muhammad Waseem_
 
 # Cel ćwiczenia
 
 Celem ćwiczenia jest zapoznanie się z:
 
-* algorytmem średniej kroczącej,
-* rozmiarem danych typu zmiennoprzecinkowego,
-* wpływem obliczeń zmiennoprzecinkowych na rozmiar kodu wykonywalnego.
+* strukturą pliku Intel HEX,
+* budową instrukcji w procesorze.
+
+# Wprowadzenie
+
+Otrzymałeś produkcyjną wersję urządzenia X[^1]. Wiesz, że wersja serwisowa wyświetla sekretny kod (flagę) po wciśnięciu przycisku podłączonego do pinu `PC4`. Przycisk ten nie jest jednak montowany w&nbsp;wersji produkcyjnej. Zmień wsad urządzenia tak, by flaga była wyświetlana po wciśnięciu przycisku _S1_, który jest podłączony do pinu `PC1`.
+
+[^1]: Być może opracował je Elon Musk. To tłumaczyłoby nazwę.
+
+\awesomebox[gray]{2pt}{\faMonument}{gray}{Zawody CTF organizowane są od 1996 roku w ramach konferencji cyberbezpieczeństwa, a także jako samodzielne imprezy, wspierane nawet przez organizacje rządowe. Na ogół polegają na łamaniu zabezpieczeń stron internetowych i serwerów, ale pojawiają się również konkursy dotyczące systemów wbudowanych.}
 
 # Uruchomienie programu wyjściowego
 
 1. Podłącz płytkę _WPSH209_ do _Arduino Uno_.
-1. Podłącz termometr LM35DZ do linii _A5_.
-1. Wyświetlacz wskazuje bieżącą temperaturę aktualizowaną mniej więcej co sekundę.
+1. Wyświetlacz wskazuje wartość `8888`.
 
 # Zadanie podstawowe
 
-Celem zadania podstawowego jest uśrednienie temperatury za pomocą prostej średniej kroczącej $SMA_k$ (ang. _Simple Moving Average_), która dla pomiarów $p_1, p_2, \dots, p_n$, jest średnią liczoną z ostatnich $k$ pomiarów:
+Odczytywanie stanu przycisku odbywa się za pomocą rozkazu `SBIS` (_Skip if Bit in I/O Register is Set_), który jest najprostszym rozkazem pozwalającym zrealizować warunek zależny od pojedynczego bitu w rejestrze I/O[^2]. Celem zadania podstawowego jest określenie pełnego opcode'u tej instrukcji i&nbsp;odnalezienie go w pliku `bin/laboratory.hex`.
 
-\begin{equation}
-SMA_k = \frac{1}{k} \sum^n_{i=n-k+1} p_i = \frac{p_{n-k+1} + p_{n-k+2} + \cdots + p_{n}}{k}
-\end{equation}
+[^2]: Wprawdzie równie dobrze mógłby być użyty rozkaz `SBIC` (_Skip if Bit in I/O Register is Cleared_), ale dla uproszczenia zadania pomijamy badanie tej możliwości.
 
-Średnia krocząca, stosowana powszechnie w analizie danych finansowych, pozwala także na proste &bdquo;wygładzenie&rdquo; danych pomiarowych. W przypadku pomiaru temperatury zmniejsza to wrażliwość na krótkie wahania temperatury spowodowane np. podmuchem powietrza.
+Poniżej zaprezentowana jest struktura pliku Intel HEX. Kolor jasnoniebieski oznacza dane, które są przedmiotem naszego zainteresowania.
 
-\awesomebox[purple]{2pt}{\faMicrochip}{purple}{W programie wyjściowym pomiary są odczytywane w przerwaniu \lstinline{ADC_vect}, a więc dokładnie wtedy, gdy przetwornik analogowo-cyfrowy zakończy dany pomiar.}
-
-![Średnia krocząca (kolor czerwony) z danych pomiarowych (kolor niebieski)](sma.svg){width=9cm}
-
-## Wymagania funkcjonalne
-
-1. Na wyświetlaczu prezentowana jest uśredniona temperatura z ostatnich 20 pomiarów.
-
-Pierwsze 19 wyników będzie zafałszowane ze względu na to, że tablica używana do uśredniania początkowo wypełniona jest zerami.
-
-## Modyfikacja programu
-
-Implementacja algorytmu wymaga zadeklarowania statycznej tablicy o rozmiarze, który najlepiej określić stałą, używaną dalej w algorytmie:
-
-```cpp
-constexpr uint8_t SIZE = 20;
-static double measures[SIZE];
-```
-
-\awesomebox[teal]{2pt}{\faCode}{teal}{Zmienne statyczne i globalne domyślnie inicijalizowane są zerami.}
-
-\begin{algorithm}
-\caption{Średnia krocząca $SMA_{size}$}
-\begin{algorithmic}[1]
-    \State $measures_{index}\gets \Call{adc.temperature}$
-    \Comment{zapis bieżącego pomiaru}
-    \State $sum \gets 0$
-    \For{$i \gets 0$ to $size$}
-    \Comment{sumowanie wszystkich $size$ ostatnich pomiarów}
-        \State $sum \gets sum + measures_i$
-    \EndFor
-    \State $index\gets index + 1$
-    \Comment{obliczamy kolejny indeks w tablicy $measures$}
-    \If{$index \geq size$}
-    \Comment{pilnujemy, by nie przekroczyć rozmiaru tablicy}
-        \State $index\gets 0$
-    \EndIf
-    \State \Return {$\frac{sum}{size}$}
-    \Comment{zwracamy średnią}
-\end{algorithmic}
-\end{algorithm}
+![Przykład pliku Intel HEX](intel-hex.png)
 
 # Zadanie rozszerzone
 
-Celem zadania rozszerzonego jest wstępne inicjalizacja średniej pierwszym pomiarem.
+Celem zadania rozszerzonego jest wgranie do urządzenia własnej wersji oprogramowania, reagującej na przycisk _S1_.
 
 ## Wymagania funkcjonalne
 
-1. Urządzenie od razu po uruchomieniu wskazuje bieżącą temperaturę.
+1. Po wciśnięciu przycisku _S1_ wyświetlana jest flaga.
 
 ## Modyfikacja programu
 
-Po uruchomieniu urządzenia tablica pomiarów powinna zostać wypełniona wartością pierwszego pomiaru.
+Zmodyfikuj plik `bin/laboratory.hex` i wgraj go do urządzenia. Każda linia pliku w standardzie Intel HEX zakończona jest sumą kontrolną. Suma kontrolna służy do wykrywania zmian w zawartości pliku, więc po podmianie instrukcji z bardzo dużym prawdopodobieństwem stanie się nieprawidłowa. Programator _AVRDUDE_ wykryje to i wydrukuje spodziewaną wartość, którą należy wpisać w pliku.
