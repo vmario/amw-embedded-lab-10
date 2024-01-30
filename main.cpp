@@ -5,7 +5,7 @@
 #include <avr/interrupt.h>
 
 /**
- * Obsługa przerwania komparatora Timer/Counter0.
+ * Obsługa przerwania przepełnienia Timer/Counter0.
  */
 ISR(TIMER0_OVF_vect)
 {
