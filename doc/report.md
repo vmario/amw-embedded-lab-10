@@ -1,5 +1,5 @@
 ---
-title: "Ćwiczenie 7: Uśrednianie danych pomiarowych"
+title: "Ćwiczenie 10: "
 author: [Mariusz Chilmon <<mariusz.chilmon@ctm.gdynia.pl>>]
 lang: "pl"
 titlepage: no
@@ -10,6 +10,7 @@ header-includes: |
   \usepackage{awesomebox}
   \usepackage{tikz}
   \usetikzlibrary{positioning}
+  \usepackage[raster]{tcolorbox}
 ...
 
 _W trosce o Państwa wyniki proszę o czytelne wpisywanie nazwisk._
@@ -32,32 +33,59 @@ _W trosce o Państwa wyniki proszę o czytelne wpisywanie nazwisk._
 
 ## Zadanie podstawowe
 
-Pomiar wykonywany jest z częstotliwością 0,95&nbsp;Hz. Uśredniamy 20 ostatnich pomiarów. Z jakiego przedziału czasu uwzględniane są pomiary?
-
-\vspace{3cm}
+\tcbset{size=small, colback=white, halign=center, valign=bottom}
+\begin{tcbitemize}[sharp corners, raster row skip=-.5mm, raster column skip=-.5mm, raster equal height=rows,
+        raster columns=16, colframe=white]
+    \tcbitem 15
+    \tcbitem 14
+    \tcbitem 13
+    \tcbitem 12
+    \tcbitem 11
+    \tcbitem 10
+    \tcbitem 9
+    \tcbitem 8
+    \tcbitem 7
+    \tcbitem 6
+    \tcbitem 5
+    \tcbitem 4
+    \tcbitem 3
+    \tcbitem 2
+    \tcbitem 1
+    \tcbitem 0
+\end{tcbitemize}
+\begin{tcbitemize}[sharp corners, raster row skip=-.5mm, raster column skip=-.5mm, raster equal height=rows,
+        raster columns=16]
+    \tcbitem \vphantom{W}
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem A
+    \tcbitem A
+    \tcbitem A
+    \tcbitem A
+    \tcbitem A
+    \tcbitem b
+    \tcbitem b
+    \tcbitem b
+\end{tcbitemize}
+\begin{tcbitemize}[sharp corners, raster row skip=-.5mm, raster column skip=-.5mm, raster equal height=rows,
+        raster columns=4]
+    \tcbitem \vphantom{W}
+    \tcbitem
+    \tcbitem
+    \tcbitem
+\end{tcbitemize}
+\begin{tcbitemize}[sharp corners, raster row skip=-.5mm, raster column skip=-.5mm, raster equal height=rows,
+        raster columns=2]
+    \tcbitem \vphantom{W}
+    \tcbitem
+\end{tcbitemize}
 
 ## Zadanie rozszerzone
 
-Odczytaj z procesu kompilacji rozmiar programu (segment `.text`) oraz rozmiar danych globalnych i&nbsp;statycznych w pamięci RAM (segment `.bss`) dla Twojego programu. Zwiększ liczbę uśrednianych próbek z 20 do 32 i powtórnie odczytaj rozmiary segmentów. Oblicz różnicę tych rozmiarów między dwoma wersjami programu.
-
-\begin{center}
-\begin{tabular}{ |c|c|c|c| } 
-\hline
- & $k = 20$ & $k = 32$ & Różnica \\
-\hline
-\texttt{.text} & & & \\ 
-\hline
-\texttt{.bss} & & & \\ 
-\hline
-\end{tabular}
-\end{center}
-
-Jaki rozmiar ma typ `double` lub inny użyty przez Ciebie do przechowywania poprzednich próbek? Jaki rozmiar ma zazwyczaj typ `double` na komputerach PC (zgodnie z IEEE 754)?
-
-\vspace{3cm}
-
 ## \faCertificate&nbsp; Zadanie specjalne
 
-_+1 pkt dla osoby, która jako pierwsza poda poprawną odpowiedź._
-
-Dlaczego po zwiększeniu rozmiaru tablicy zmniejszył się rozmiar kodu programu, a więc liczba instrukcji?
