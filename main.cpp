@@ -1,7 +1,6 @@
 #include "shifter.hpp"
 #include "display.hpp"
 #include "timer.hpp"
-#include "adc.hpp"
 
 #include <avr/interrupt.h>
 
@@ -25,8 +24,10 @@ int main()
 	sei();
 
 	while (true) {
-		if (bit_is_clear(PINC, 2)) {
+		if (bit_is_clear(PINC, 4)) {
 			display.print(420);
+		} else {
+			display.print(8888);
 		}
 	}
 }
