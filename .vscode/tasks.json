@@ -13,34 +13,6 @@
     },
     "tasks": [
         {
-            "label": "all",
-            "detail": "Build project",
-            "type": "process",
-            "command": "${config:make}",
-            "args": [
-                "all",
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": false,
-            },
-            "problemMatcher": [
-                "$gcc",
-            ],
-        },
-        {
-            "label": "clean",
-            "detail": "Clean project",
-            "type": "process",
-            "command": "${config:make}",
-            "args": [
-                "clean",
-            ],
-            "group": {
-                "kind": "build",
-            },
-        },
-        {
             "label": "program",
             "detail": "Build project and program the target",
             "type": "process",
