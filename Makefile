@@ -95,7 +95,7 @@ clean:
 	$(RM) $(TARGET).hex
 	$(RMDIR) $(TARGETDIR)
 
-program: all
+program:
 	$(AVRDUDE) \
 		-p $(MCU) -c arduino -P $(PORT) -b 115200 \
 		-U flash:w:$(TARGET).hex:i
