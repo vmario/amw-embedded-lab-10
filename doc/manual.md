@@ -1,5 +1,5 @@
 ---
-title: "Ćwiczenie 10: "
+title: "Ćwiczenie 10: Zawody _Capture the flag_ (CTF)"
 subtitle: "Instrukcja laboratorium"
 footer-left: "Instrukcja laboratorium"
 author: [Mariusz Chilmon <<mariusz.chilmon@ctm.gdynia.pl>>]
@@ -14,29 +14,37 @@ header-includes: |
   \usepackage{algpseudocode}
 ...
 
-> An investment in knowledge always pays the best interest.
+> Give a man a program, frustrate him for a day. Teach a man to program, frustrate him for a lifetime.
 >
-> — _Benjamin Franklin_
+> — _Muhammad Waseem_
 
 # Cel ćwiczenia
 
 Celem ćwiczenia jest zapoznanie się z:
 
-* algorytmem średniej kroczącej,
-* rozmiarem danych typu zmiennoprzecinkowego,
-* wpływem obliczeń zmiennoprzecinkowych na rozmiar kodu wykonywalnego.
+* strukturą pliku Intel Hex,
+* budową instrukcji w procesorze.
+
+# Wprowadzenie
+
+Otrzymałeś produkcyjną wersję urządzenia X. Wiesz, że wersja serwisowa wyświetla sekretny kod (flagę) po wciśnięciu przycisku podłączonego do pinu `XXXX`. Przycisk ten nie jest jednak montowany w&nbsp;wersji produkcyjnej. Zmień wsad urządzenia tak, by flaga była wyświetlana po wciśnięciu przycisku _S1_.
 
 # Uruchomienie programu wyjściowego
 
 1. Podłącz płytkę _WPSH209_ do _Arduino Uno_.
+1. Wyświetlacz wskazuje wartość `8888`.
 
 # Zadanie podstawowe
+
+Wskaż w pliku wynikowym poszukiwaną instrukcję.
 
 ## Wymagania funkcjonalne
 
 ## Modyfikacja programu
 
 # Zadanie rozszerzone
+
+Wyświetl poszukiwaną flagę.
 
 ## Wymagania funkcjonalne
 
