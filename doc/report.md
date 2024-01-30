@@ -1,5 +1,5 @@
 ---
-title: "Ćwiczenie 10: Zawody _Capture the flag_ (CTF)"
+title: "Ćwiczenie 10: Zawody CTF (_Capture&nbsp;the flag_)"
 author: [Mariusz Chilmon <<mariusz.chilmon@ctm.gdynia.pl>>]
 lang: "pl"
 titlepage: no
@@ -33,55 +33,61 @@ _W trosce o Państwa wyniki proszę o czytelne wpisywanie nazwisk._
 
 ## Zadanie podstawowe
 
-### Obliczenie kodu poszukiwanej instrukcji
+Oblicz kod wyjściowej instrukcji (sprawdzającej niedostępny dla nas przycisk podłączony do `PC4`).
 
 \begin{description}
 \item[O]
-\textit{Opcode}, czyli kod instrukcji.
+\textit{Opcode}, czyli kod instrukcji \lstinline{SBIS}.
 \item[A]
-Adres rejestru.
+Adres rejestru \lstinline{PINC}.
 \item[b]
-Numer bitu.
+Numer bitu \lstinline{4}.
 \end{description}
+
+\awesomebox[violet]{2pt}{\faBook}{violet}{Opcode instrukcji \lstinline{SBIS} znajdziesz w \textit{AVR Instruction Set Manual}.}
+
+\awesomebox[violet]{2pt}{\faBook}{violet}{Adres rejestru znajdziesz w rozdziale \textit{Register Summary} dokumentacji mikrokontrolera. Dla rozkazu \lstinline{SBIS} stosuje się adres przed nawiasem.}
+
+\break
 
 \tcbset{size=small, colback=white, halign=center, valign=bottom}
 \begin{tcbitemize}[sharp corners, raster row skip=-.5mm, raster column skip=-.5mm, raster equal height=rows,
         raster columns=16, colframe=white]
-    \tcbitem 15
-    \tcbitem 14
-    \tcbitem 13
-    \tcbitem 12
-    \tcbitem 11
-    \tcbitem 10
-    \tcbitem 9
-    \tcbitem 8
-    \tcbitem 7
-    \tcbitem 6
-    \tcbitem 5
-    \tcbitem 4
-    \tcbitem 3
-    \tcbitem 2
-    \tcbitem 1
-    \tcbitem 0
+    \tcbitem O
+    \tcbitem O
+    \tcbitem O
+    \tcbitem O
+    \tcbitem O
+    \tcbitem O
+    \tcbitem O
+    \tcbitem O
+    \tcbitem A
+    \tcbitem A
+    \tcbitem A
+    \tcbitem A
+    \tcbitem A
+    \tcbitem b
+    \tcbitem b
+    \tcbitem b
 \end{tcbitemize}
 \begin{tcbitemize}[sharp corners, raster row skip=-.5mm, raster column skip=-.5mm, raster equal height=rows,
         raster columns=16]
-    \tcbitem O
-    \tcbitem O
-    \tcbitem O
-    \tcbitem O
-    \tcbitem O
-    \tcbitem O
-    \tcbitem O
-    \tcbitem O
-    \tcbitem A
-    \tcbitem A
-    \tcbitem A
-    \tcbitem A
-    \tcbitem A
-    \tcbitem b
-    \tcbitem b
-    \tcbitem b
+    \tcbitem \vphantom{W}
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
 \end{tcbitemize}
 
 Każdą czwórkę bitów zamień na cyfrę szesnastkową:
@@ -110,50 +116,48 @@ Mamy do czynienia z mikroprocesorem o architekturze _little endian_, co oznacza,
     \tcbitem
 \end{tcbitemize}
 
-Odnajdź w skompilowanym wsadzie obliczoną powyżej wartość.
+## Zadanie rozszerzone
 
-### Obliczenie kodu nowej instrukcji
-
-Teraz zmodyfikuj instrukcję tak, by odnosiła się do pinu XXXXX:
+Zmodyfikuj instrukcję tak, by odnosiła się do pinu `PC1`:
 
 \tcbset{size=small, colback=white, halign=center, valign=bottom}
 \begin{tcbitemize}[sharp corners, raster row skip=-.5mm, raster column skip=-.5mm, raster equal height=rows,
         raster columns=16, colframe=white]
-    \tcbitem 15
-    \tcbitem 14
-    \tcbitem 13
-    \tcbitem 12
-    \tcbitem 11
-    \tcbitem 10
-    \tcbitem 9
-    \tcbitem 8
-    \tcbitem 7
-    \tcbitem 6
-    \tcbitem 5
-    \tcbitem 4
-    \tcbitem 3
-    \tcbitem 2
-    \tcbitem 1
-    \tcbitem 0
+    \tcbitem O
+    \tcbitem O
+    \tcbitem O
+    \tcbitem O
+    \tcbitem O
+    \tcbitem O
+    \tcbitem O
+    \tcbitem O
+    \tcbitem A
+    \tcbitem A
+    \tcbitem A
+    \tcbitem A
+    \tcbitem A
+    \tcbitem b
+    \tcbitem b
+    \tcbitem b
 \end{tcbitemize}
 \begin{tcbitemize}[sharp corners, raster row skip=-.5mm, raster column skip=-.5mm, raster equal height=rows,
         raster columns=16]
-    \tcbitem O
-    \tcbitem O
-    \tcbitem O
-    \tcbitem O
-    \tcbitem O
-    \tcbitem O
-    \tcbitem O
-    \tcbitem O
-    \tcbitem A
-    \tcbitem A
-    \tcbitem A
-    \tcbitem A
-    \tcbitem A
-    \tcbitem b
-    \tcbitem b
-    \tcbitem b
+    \tcbitem \vphantom{W}
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
+    \tcbitem
 \end{tcbitemize}
 \begin{tcbitemize}[sharp corners, raster row skip=-.5mm, raster column skip=-.5mm, raster equal height=rows,
         raster columns=4]
@@ -172,10 +176,6 @@ Teraz zmodyfikuj instrukcję tak, by odnosiła się do pinu XXXXX:
     \tcbitem \vphantom{W}
     \tcbitem
 \end{tcbitemize}
-
-Zamień odnalezioną wartość na obliczoną powyżej.
-
-## Zadanie rozszerzone
 
 ## \faCertificate&nbsp; Bonus
 
